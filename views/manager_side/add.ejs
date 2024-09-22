@@ -1,0 +1,60 @@
+<%- include('../partials/header.ejs'); -%>
+
+<div class = "addBook container">
+    <div class = "updateImg" id="imageBox">
+        <% if(locals.imgLink){ %>
+            <img src = "<%= imgLink%>" class = "updateImg">
+        <%}else{%>
+            <img src = "imgs/default_book.jpg" class = "updateImg">
+            <%}%>
+        <form id="uploadForm" enctype="multipart/form-data" action = "/upload" method="post">
+            <input type="file" name="image" id="imageInput" accept="image/*" >
+            <button type="submit">Upload</button>
+        </form>
+    </div>
+    <div class="col-md-7 col-lg-8">
+        <h4 class="mb-3 text">Add a Book</h4>
+
+        <% if(locals.msgUpload) {%>
+            <h5 class = "reqText msgRegister"><%= msgUpload%></h5>
+
+            <% }%>
+        <div class="row g-3 reqText">
+            <form action="/add_book" method="post">
+                <div class="col-12">
+                    <label for="firstName" class="form-label">Book Title</label>
+                    <input type="text" class="form-control" name="bookName" placeholder="Enter Book Name" >
+                    <div class="invalid-feedback">
+                        Valid first name is required.
+                    </div>
+                </div>
+
+
+                <div class="col-12">
+                    <label for="firstName" class="form-label">Author</label>
+                    <input type="text" class="form-control" name="authorName" placeholder="Enter author name" >
+                    <div class="invalid-feedback">
+                        Valid first name is required.
+                    </div>
+                </div>
+
+                <div class="col-12">
+                    <label for="email" class="form-label">ISBN </label>
+                    <input type="text" class="form-control" name="isbn" placeholder="isbn">
+                    <div class="invalid-feedback">
+                        Please enter a valid email address for shipping updates.
+                    </div>
+                </div>
+
+                <hr class="my-4">
+                <% if(locals.imgLink){ %>
+                    <input type="hidden" name="imgURL" value="<%= imgLink%>">
+                <%}%>
+                <button class="w-100 btn btn-primary btn-lg" type="submit">Continue to add</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<%- include('../partials/footer.ejs'); -%>

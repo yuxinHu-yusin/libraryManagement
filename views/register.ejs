@@ -1,0 +1,46 @@
+<%- include('partials/header.ejs'); -%>
+<main>
+    <div class = "container">
+        <img class=" signImg" src="imgs/register_book.jpg" alt="books" height = "250" width = "250">
+            <div class = "text registerBox">
+                <h2 class="mb-3 fw-normal text registerTitle">Create Your Account</h2>
+            <% if(locals.msgRegister) {%>
+                <h5 class = "reqText msgRegister"><%= msgRegister%></h5>
+                <% }%>
+            <form action = "/register" method = "post">
+                <div class="form-floating text">
+                    <input type="text" name = "name" class="form-control"  id="floatingInput" placeholder="username" >
+                    <label for="floatingInput">Username</label>
+                </div>
+
+                <div class="form-floating text">
+                    <input type="email" name = "email" class="form-control"  id="floatingInput" placeholder="name@example.com" >
+                    <label for="floatingInput">Email address</label>
+                </div>
+                <div class="form-floating text">
+                    <input type="password" name = "password" class="form-control" id="floatingPassword" placeholder="Password">
+                    <label for="floatingPassword">Password</label>
+                </div>
+
+                <div class="form-floating mt-3">
+                    <div class="mt-0">
+                        <label class="form-label text">Select a Secret Questions</label>
+                        <select class="form-select text" name="question">
+                            <option value="What city were you born in">What city were you born in</option>
+                            <option value="What was the make and model of your first car?">What was the make and model of your first car?</option>
+                            <option value="In what city or town did your parents meet?">In what city or town did your parents meet?</option>
+                            <option value="Your first pet name">Your first pet name</option>
+                        </select>
+                    </div>
+
+
+                    <div class="form-floating text">
+                        <input type="password" name = "securityAnswer" class="form-control" id="floatingPassword" placeholder="Answer">
+                        <label for="floatingPassword">Answer</label>
+                    </div>
+                </div>
+                <button class="btn btn-outline-primary w-100 py-2 text bg-primary-subtle" type="submit">Sign Up</button>
+            </form>
+        </div>
+    </div>
+<%- include('partials/footer.ejs'); -%>

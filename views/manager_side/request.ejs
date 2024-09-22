@@ -1,0 +1,91 @@
+<%- include('../partials/header.ejs'); -%>
+<div class = "requests align-items-center">
+    <h1 class = "text">Requests From Users</h1>
+    <div class="table-responsive requestTable">
+        <table class="table table-striped-columns table-sm requestTable reqText">
+          <thead class = "table-primary h5">
+            <tr>
+              <th scope="col">Request ID</th>
+              <th scope="col">User ID</th>
+              <th scope="col">Book ID</th>
+              <th scope="col">Book Title</th>
+              <th scope="col">Borrow or Return</th>
+              <th scope="col">Date</th>
+              <th scope="col">Confirm</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% requests.forEach(function(request){ %>
+                <tr>
+                    <td><%= request.req_id %></td>
+                    <td><%= request.user_id %></td>
+                    <td><%= request.book_id %></td>
+                    <td><%= request.title %></td>
+                    <td><%= request.borrow_or_return %></td>
+                    <td><%= request.req_date %></td>
+
+
+                    <% if(request.status == true) {%>
+                      <td> Complete </td>
+                      <%}else{%>
+                    
+                      <td>
+                        <button type="button" class="btn btn-outline-success bg-primary-subtle text" 
+                                data-bs-toggle="modal" data-bs-target="#confirmModel-<%= request.req_id %>">
+                          Confirm
+                        </button>
+                      
+                        <!-- Modal for Delete Confirmation -->
+                        <div class="modal fade" id="confirmModel-<%= request.req_id %>" tabindex="-1" 
+                             aria-labelledby="confirmModelLabel-<%= request.req_id %>" aria-hidden="true">
+                          <div class="modal-dialog">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h5 class="modal-title" id="deleteModalLabel-<%= request.req_id%>">Confirm Delete</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                              </div>
+                              <div class="modal-body">
+                                <p>
+                                  Are you sure you want to confirm this Order:
+                                </p>
+                                <p> Start Date: "<%= request.req_date %>"</p>
+                                <p> Book Title: "<%= request.title %>"</p>
+                                <p> Request: "<%= request.borrow_or_return %>"</p>
+                                <p> Days: "<%= request.borrow_days %>"</p>
+                                <p> UserID: "<%= request.user_id%>"</p>
+                               
+                                
+                              </div>
+                                <div class="modal-footer">
+                                <!-- The form wraps the hidden inputs and Delete button -->
+                                <form action="/confirm_req" method="POST">
+                                  <input type="hidden" name="requestID" value="<%= request.req_id %>">
+                                  <input type="hidden" name="bookID" value="<%= request.book_id %>">
+                                  <input type="hidden" name="UserID" value="<%= request.user_id %>">
+                                  <input type="hidden" name="title" value="<%= request.title %>">
+                                  <input type="hidden" name="date" value="<%= request.req_date %>">
+                                  <input type="hidden" name="BorrowOrReturn" value="<%= request.borrow_or_return %>">
+                                  <input type="hidden" name="days" value="<%= request.borrow_days %>">
+                                    <button type="submit" class="btn btn-primary">Confirm</button> 
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                </form>
+                              </div>
+
+                            
+                            </div>
+                          </div>
+                        </div>
+                        <%}%>
+                      </td>
+                      
+                  </tr>
+            <%})%>
+            
+          </tbody>
+        </table>
+      </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
+<%- include('../partials/footer.ejs'); -%>

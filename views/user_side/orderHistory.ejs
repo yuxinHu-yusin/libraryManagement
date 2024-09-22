@@ -1,0 +1,41 @@
+<%- include('../partials/header.ejs'); -%>
+
+<div class = "ordersCards ">
+
+    <h1 class = "text"> Order History</h1>
+    <% if(locals.orders){%>
+            <% orders.forEach(function(order){ %>
+                <div class="card bg-light-subtle">
+                    <div class="card-body text">
+                        <p>Order Number: <%= order.order_id%></p>
+                        <p>Book Name: <%= order.book_name%></p>
+                        <p>Need Return Time: <%= order.return_time%></p>
+                    </div>
+
+                    <%if(!order.returned){%>
+                        <div class = "card-body">
+                            <form action = "\return" method="POST">
+                                <div class="mb-3">
+                                    <label for="day" class="form-label text">Choose the day you return this:</label>
+                                    <input type="date" class="form-control text" id="day" name="day">
+                                </div>
+                                <input type="hidden" name = "orderID" class="form-control" value="<%= order.order_id%>" readonly>
+                                <input type="hidden" name = "userID" class="form-control" value="<%= order.user_id%>" readonly>
+                                <input type="hidden" name = "bookID" class="form-control" value="<%= order.book_id%>" readonly>
+                                <input type="hidden" name = "title" class="form-control" value="<%= order.book_name%>" readonly>
+                                <button type="submit" class="btn bg-light-subtle text returnBtn">Return</button>
+                            </form>
+                        </div>
+                    <%}%>
+                </div>
+
+            <%})%>
+        <%}%>
+</div>
+
+       
+
+
+
+
+<%- include('../partials/footer.ejs'); -%>

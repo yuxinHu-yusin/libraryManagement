@@ -1,0 +1,32 @@
+<%- include('../partials/header.ejs'); -%>
+<div class = "update">
+    <div class="col-md-12 col-lg-12">
+        <h3 class="mb-3 text">Update your profile</h3>
+
+        <% if(locals.msgUpdate) {%>
+            <h5 class = "reqText msgRegister"><%= msgUpdate%></h5>
+
+            <% }%>
+
+        <hr>
+        <div class="row g-3 reqText">
+            <div class="col-12">
+                <form action="/updateUsername" method="post" class = "updateBox">
+                        <label for="firstName" class="form-label">Username</label>
+                        <input type="text" name = "name" class="form-control" id="firstName" placeholder="Update the username" value="" required="">
+                        <button class="w-20 btn" type="submit">update</button>
+                </form>
+            </div>
+
+            <div class="col-12">
+                <form action="/updatePassword" method="post" class = "updateBox">
+                    <label for="firstName" class="form-label">Password</label>
+                    <input type="text" name = "password" class="form-control" id="name" placeholder="Update the password" value="" required="">
+                    <button class="w-20 btn" type="submit">update</button>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+<%- include('../partials/footer.ejs'); -%>

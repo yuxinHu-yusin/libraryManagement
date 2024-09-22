@@ -1,0 +1,68 @@
+<%- include('./partials/header.ejs'); -%>
+<div class = "update">
+    <div class="col-md-12 col-lg-12">
+        <h2 class="mb-3 text">Forgot my password</h2>
+
+        <% if(locals.msgForgot) {%>
+            <h5 class = "reqText msgRegister"><%= msgForgot%></h5>
+
+            <% }%>
+
+        <hr>
+        <div class="row g-3 reqText">
+
+            <% if(status == false){%>
+                    <div class="mt-3">
+                        <h4 class="form-label reqText">Enter your email address</h4>
+                        <div class="form-floating reqText">
+                            <% if(!locals.email){%>
+                                <form action = "/checkEmail" method = post>
+                                    <input type="text" name = "email" class="form-control"  placeholder="Email Address">
+                                    <label class = "reqText"></label>
+                                    <button class="w-20 btn mt-1" type="submit">Enter</button>
+                                </form>
+                                <%}else{%>
+                                    <input type="text" name="email" class="form-control" value="<%= email %>" placeholder="Email Address" readonly >
+                                    <label class = "reqText"></label>
+                                    <%}%>
+                        </div>
+                    </div>
+                    
+            <div class="form-floating mt-3">
+                <% if(locals.question){%>
+                    <div class="mt-0">
+                        <h4 class="form-label reqText"><%= question%></h4>
+                    </div>
+                    <div class="form-floating reqText">
+                        <% if(locals.email){%>
+                            <form action = "/checkAnswer" method = post>
+                                <input type="text" name = "answer" class="form-control" id="floatingPassword" placeholder="Answer">
+                                <input type="hidden" name="email"  value="<%= email %>" >
+                                <input type="hidden" name="question"  value="<%= question %>" >
+                                <label for="floatingPassword">Answer</label>
+                                <button class="w-20 btn mt-1" type="submit">Enter</button>
+                            </form>
+                            <%}%>
+                    </div>
+                <%}%>
+            </div>
+            <% }else{%>
+                <div class="col-12">
+                    <div class="mt-0">
+                        <h4 class="form-label reqText">Update your password</h4>
+                    </div>
+                    <form action="/updatePass" method="post" class = "updateBox">
+                        <label for="firstName" class="form-label">Password</label>
+                        <input type="hidden" name="email"  value="<%= email %>" >
+                        <input type="text" name = "password" class="form-control" id="name" placeholder="Update the password" value="" required="">
+                        <button class="w-20 btn" type="submit">update</button>
+                    </form>
+                </div>
+                <% }%>
+            
+
+        </div>
+    </div>
+</div>
+
+<%- include('./partials/footer.ejs'); -%>

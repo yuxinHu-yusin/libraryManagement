@@ -1,0 +1,44 @@
+<%- include('../partials/header.ejs'); -%>
+<div class = "requests align-items-center">
+    <h1 class = "text">Order History</h1>
+    <div class="table-responsive requestTable">
+        <table class="table table-striped-columns table-sm requestTable reqText">
+          <thead class = "table-primary h5">
+            <tr>
+              <th scope="col">Order ID</th>
+              <th scope="col">Book ID</th>
+              <th scope="col">Book Title</th>
+              <th scope="col">Borrow or Return</th>
+              <th scope="col">Date</th>
+              <th scope="col">Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% requests.forEach(function(request){ %>
+                <tr>
+                    <td><%= request.req_id %></td>
+                    <td><%= request.book_id %></td>
+                    <td><%= request.title %></td>
+                    
+                    <td><%= request.borrow_or_return %></td>
+                    <td><%= request.req_date %></td>
+
+                    <% if(request.status == true) {%>
+                      <td> Complete </td>
+                      <%}else{%>
+                        <td>
+                          <form action="/cancelOrder" method="POST">
+                            <input type="hidden" name="requestID" value="<%= request.req_id %>">
+                            <button type="submit" class = "btn btn-outline-success bg-primary-subtle text">Cancel</button>
+                          </form>
+                        </td>
+                        <%}%>
+                  </tr>
+            <%})%>
+            
+          </tbody>
+        </table>
+      </div>
+</div>
+
+<%- include('../partials/footer.ejs'); -%>

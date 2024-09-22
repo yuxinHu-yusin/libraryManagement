@@ -1,0 +1,43 @@
+<%- include('partials/header.ejs'); -%>
+
+<main>
+    <div class = "container">
+        <img class=" signImg" src="imgs/login_img.png" alt="books" height = "250" width = "250">
+        <div class = loginInputs>
+            <div class = "loginTitle text">
+                <h1 class="h3 mb-3 fw-normal text signTitle">Login</h1>
+            </div>
+            <form action = "/login" method = "post">
+                <div class="form-floating text">
+                    <input type="email" name  = "email" class="form-control" id="floatingInput" placeholder="name@example.com">
+                    <label for="floatingInput">Email address</label>
+                </div>
+                <div class="form-floating text">
+                    <input type="password"  name  = "password" class="form-control" id="floatingPassword" placeholder="Password">
+                    <label for="floatingPassword">Password</label>
+                </div>
+
+                <div class = "checkBoxes">
+                    <div class="form-check">
+                        <input name = "userType" class="form-check-input" type="checkbox" value="user" id="flexCheckDisabled">
+                        <label class="form-check-label text" for="flexCheckDisabled">
+                        User
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input name = "userType" class="form-check-input" type="checkbox" value="manager" id="flexCheckCheckedDisabled">
+                        <label class="form-check-label text" for="flexCheckCheckedDisabled">
+                        Manager
+                        </label>
+                    </div>
+                </div>
+            <div class = "buttons">
+                <button class="btn btn-outline-primary w-75 text bg-primary-subtle" type="submit">Sign in</button>
+            </form>
+            <form action = "/forgot" method = "get">
+                    <button class="btn btn-outline-primary w-100  text bg-primary-subtle" type="submit">Forget Password</button>
+            </form>
+            </div>
+        </div>
+    </div>
+<%- include('partials/footer.ejs'); -%>
