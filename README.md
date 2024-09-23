@@ -331,8 +331,8 @@ Log in with a manager account to access the dashboard.
 Add or remove books, track user requests, and monitor library activities.
 
 
-Database Schema
-![image](https://github.com/user-attachments/assets/246cd509-1a2c-4ecc-a847-b2f2341e8165)
+Database (ER Model)
+![image](https://github.com/user-attachments/assets/720736c6-d161-4f3f-8645-52fb5c7e2cb8)
 
 
 
